@@ -1,8 +1,44 @@
 "use client";
 
+import gsap from "gsap";
+import Lenis from "lenis";
 import Image from "next/image";
+import { useEffect } from "react";
 
 export default function Home() {
+  //Lenis only
+  useEffect(() => {
+    const lenis = new Lenis();
+
+    lenis.on("scroll", (e: Event) => {
+      console.log(e);
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+  }, []);
+
+  // GSAP + Lenis
+  // useEffect(() => {
+  //   const lenis = new Lenis();
+
+  //   lenis.on("scroll", (e: Event) => {
+  //     console.log(e);
+  //   });
+
+  //   lenis.on("scroll", ScrollTrigger.update);
+
+  //   gsap.ticker.add((time) => {
+  //     lenis.raf(time * 1000);
+  //   });
+
+  //   gsap.ticker.lagSmoothing(0);
+  // }, []);
+
   return (
     <main>
       <div className="flex flex-col sm:flex-row items-center justify-center h-screen">
